@@ -15,11 +15,11 @@
   </div>
   <div class="mb-3">
     <label for="" class="form-label">Inicio</label>
-    <input id="inicio" name="inicio" type="datetime" class="form-control" tabindex="3">
+    <input id="inicio" name="inicio" type="datetime-local" class="form-control" tabindex="3">
   </div>
   <div class="mb-3">
     <label for="" class="form-label">Final</label>
-    <input id="final" name="final" type="datetime" step="any"  class="form-control" tabindex="3">
+    <input id="final" name="final" type="datetime-local" step="any"  class="form-control" tabindex="3">
   </div>
   <a href="/salas" class="btn btn-secondary" tabindex="5">Cancelar</a>
   <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Sala;
 
 class SalaController extends Controller
 {
@@ -13,7 +14,9 @@ class SalaController extends Controller
      */
     public function index()
     {
-        return view('sala.index');
+        //return 'Vista index()';
+        $salas = Sala::all();
+        return view('sala.index')->with('salas',$salas);
     }
 
     /**
@@ -23,7 +26,7 @@ class SalaController extends Controller
      */
     public function create()
     {
-        //
+        return view('sala.create');
     }
 
     /**
@@ -34,7 +37,14 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $salas = new Sala();
+        $salas->Sala = $request->get('sala');
+        $salas->Descripcion = $request->get('descripcion');
+        $salas->Inicio = $request->get('inicio');
+        $salas->Final = $request->get('final');
+        $salas->save();
+
+        return redirect('/salas');
     }
 
     /**
@@ -56,7 +66,8 @@ class SalaController extends Controller
      */
     public function edit($id)
     {
-        //
+         $sala = Sala::find($id);
+         return view('sala.edit')->with('sala',$sala);
     }
 
     /**
@@ -68,7 +79,14 @@ class SalaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sala = Sala::find($id);
+        $sala->sala = $request->get('sala');
+        $sala->Descripcion = $request->get('descripcion');
+        $sala->Inicio = $request->get('inicio');
+        $sala->Final = $request->get('final');
+        $sala->save();
+
+        return redirect('/salas');
     }
 
     /**
@@ -79,6 +97,9 @@ class SalaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sala = Sala::find($id);        
+        $sala->delete();
+
+        return redirect('/salas');
     }
 }

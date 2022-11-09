@@ -10,10 +10,10 @@
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Código</th>
+      <th scope="col">Sala</th>
       <th scope="col">Descripción</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">Precio</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Final</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
