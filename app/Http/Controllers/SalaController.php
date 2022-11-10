@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Sala;
 use DateTime;
 
+use Illuminate\Support\Facades\DB;
+
 class SalaController extends Controller
 {
     /**
@@ -44,7 +46,12 @@ class SalaController extends Controller
         $salas->Descripcion = $request->get('descripcion');
         $salas->Inicio = $request->get('inicio');
         $salas->Final = $request->get('final');
-
+       
+       // condicional que verifica si una sala ya ha sido ocupada
+        if(Sala::where('Sala',$salas->Sala)->count()>0) {return redirect('/salas');}
+        else 
+{
+   
         $fechainicio=new DateTime( $salas->Inicio );
         $fechafinal=new DateTime( $salas->Final );
         $intervalo = $fechainicio->diff($fechafinal);
@@ -66,6 +73,8 @@ class SalaController extends Controller
             }
         }
         return redirect('/salas'); //redireccion a la vista principal
+    }
+    
         
     }
 
