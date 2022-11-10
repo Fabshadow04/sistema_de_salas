@@ -8,7 +8,14 @@
     @method('PUT')
   <div class="mb-3">
     <label for="" class="form-label">Sala</label>
-    <input id="sala" name="sala" type="text" class="form-control" value="{{$sala->Sala}}">    
+    
+    <select id="sala" name="sala" type="text" class="form-control" tabindex="1">
+  <option value="{{$sala->Sala}}">{{$sala->Sala}}</option>
+  <option value="sala1">Sala 1</option>
+  <option value="sala2">Sala 2</option>
+  <option value="sala3">Sala 3</option>
+  <option value="sala4">Sala 4</option>
+</select>  
   </div>
   <div class="mb-3">
     <label for="" class="form-label">Descripción</label>

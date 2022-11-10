@@ -16,7 +16,7 @@ class SalaController extends Controller
     public function index()
     {
         //return 'Vista index()';
-        $salas = Sala::all();
+        $salas = Sala::all(); //trayendo los datos de la bd
         return view('sala.index')->with('salas',$salas);
     }
 
@@ -38,6 +38,7 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
+        //insertando los datos en la base de datos
         $salas = new Sala();
         $salas->Sala = $request->get('sala');
         $salas->Descripcion = $request->get('descripcion');
@@ -48,7 +49,7 @@ class SalaController extends Controller
         $fechafinal=new DateTime( $salas->Final );
         $intervalo = $fechainicio->diff($fechafinal);
 
-        if ( $intervalo->y<=0)
+        if ( $intervalo->y<=0) //condicionales para que solo pueda ser intervalo de dos horas
         {
             if($intervalo->m<=0)
             {
@@ -64,7 +65,7 @@ class SalaController extends Controller
 
             }
         }
-        return redirect('/salas'); 
+        return redirect('/salas'); //redireccion a la vista principal
         
     }
 
@@ -87,8 +88,8 @@ class SalaController extends Controller
      */
     public function edit($id)
     {
-         $sala = Sala::find($id);
-         return view('sala.edit')->with('sala',$sala);
+         $sala = Sala::find($id); //si filtra por id
+         return view('sala.edit')->with('sala',$sala); //retorna vista de editar
     }
 
     /**
@@ -100,14 +101,32 @@ class SalaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sala = Sala::find($id);
+        $sala = Sala::find($id); //introduccion de los datos
         $sala->sala = $request->get('sala');
         $sala->Descripcion = $request->get('descripcion');
         $sala->Inicio = $request->get('inicio');
         $sala->Final = $request->get('final');
-        $sala->save();
+        $fechainicio=new DateTime( $sala->Inicio );
+        $fechafinal=new DateTime( $sala->Final );
+        $intervalo = $fechainicio->diff($fechafinal);
 
-        return redirect('/salas');
+        if ( $intervalo->y<=0) //condicionales para que solo pueda ser intervalo de dos horas
+        {
+            if($intervalo->m<=0)
+            {
+              if( $intervalo->d<=0)
+              {
+                if( $intervalo->h<=2)
+                {
+                    if ($intervalo->h==2){ if($intervalo->i>=1){   return back();  }}
+                    $sala->save();
+                 
+                }
+              }
+
+            }
+        }
+        return redirect('/salas'); //redireccion a la vista principal
     }
 
     /**
@@ -118,9 +137,9 @@ class SalaController extends Controller
      */
     public function destroy($id)
     {
-        $sala = Sala::find($id);        
-        $sala->delete();
+        $sala = Sala::find($id);        //se filtra por id
+        $sala->delete(); //se elimina de la base de datos
 
-        return redirect('/salas');
+        return redirect('/salas'); //redireccion
     }
 }
