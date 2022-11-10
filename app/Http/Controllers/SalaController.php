@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sala;
+use DateTime;
 
 class SalaController extends Controller
 {
@@ -42,9 +43,29 @@ class SalaController extends Controller
         $salas->Descripcion = $request->get('descripcion');
         $salas->Inicio = $request->get('inicio');
         $salas->Final = $request->get('final');
-        $salas->save();
 
-        return redirect('/salas');
+        $fechainicio=new DateTime( $salas->Inicio );
+        $fechafinal=new DateTime( $salas->Final );
+        $intervalo = $fechainicio->diff($fechafinal);
+
+        if ( $intervalo->y<=0)
+        {
+            if($intervalo->m<=0)
+            {
+              if( $intervalo->d<=0)
+              {
+                if( $intervalo->h<=2)
+                {
+                    if ($intervalo->h==2){ if($intervalo->i>=1){     return back();         }}
+                    $salas->save();
+                    return redirect('/salas'); 
+                }
+              }
+
+            }
+        }
+        
+        
     }
 
     /**
