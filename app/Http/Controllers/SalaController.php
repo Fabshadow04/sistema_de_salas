@@ -56,15 +56,15 @@ class SalaController extends Controller
               {
                 if( $intervalo->h<=2)
                 {
-                    if ($intervalo->h==2){ if($intervalo->i>=1){     return back();         }}
+                    if ($intervalo->h==2){ if($intervalo->i>=1){   return back();  }}
                     $salas->save();
-                    return redirect('/salas'); 
+                 
                 }
               }
 
             }
         }
-        
+        return redirect('/salas'); 
         
     }
 
