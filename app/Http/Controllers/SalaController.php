@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\DB;
 class SalaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Codigo desarrollado por Fabrizio Martinez Tapia para examen de 
+     * Lion Systems Solutions
      * @return \Illuminate\Http\Response
      */
     public function index()
